@@ -19,7 +19,9 @@ import webbrowser
 import vulndb
 import glib
 import vulnalert
+from os.path import (dirname,realpath)
 
+spath = dirname(realpath(__file__))
 
 ########################################################################
 #							TRAY APPLET
@@ -28,7 +30,7 @@ import vulnalert
 
 class TrayApplet:
 	def __init__(self):
-		icon = gtk.status_icon_new_from_file("icon.png")
+		icon = gtk.status_icon_new_from_file("{}/icon.png".format(spath))
 		icon.connect('popup-menu', self.rightClick)
 		icon.connect('activate', self.leftClick)
 		self.window = NistWindow()
@@ -97,7 +99,7 @@ class NistWindow:
 		self.window.set_border_width(10)
 		self.window.set_position(gtk.WIN_POS_CENTER_ALWAYS)
 		self.window.connect("delete-event", self.destroy)
-		self.window.set_icon_from_file("icon.png")
+		self.window.set_icon_from_file("{}/icon.png".format(spath))
 		
 		# Window Boxes
 		main_vbox = gtk.VBox(False, 3)
