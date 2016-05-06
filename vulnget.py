@@ -15,9 +15,10 @@ import sys
 import os
 import sqlite3
 import vulndb
+from os.path import (dirname,realpath)
 
-
-config = ET.parse('config.xml')
+spath = dirname(realpath(__file__))
+config = ET.parse("{}/config.xml".format(spath))
 config_root = config.getroot()
 
 

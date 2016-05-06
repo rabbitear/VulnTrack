@@ -12,11 +12,14 @@ import vulndb
 import smtplib
 import xml.etree.ElementTree as ET
 import dbus
+from os.path import (dirname,realpath)
+
+spath = dirname(realpath(__file__))
 
 class alert:
 	def __init__(self):
 		# Read config file to get alerting options
-		config = ET.parse('config.xml')
+		config = ET.parse("{}/config.xml".format(spath))
 		root = config.getroot()
 		for options in root.findall('options'):
 				for opt in options:
@@ -88,7 +91,7 @@ class alert:
 			interface = "org.freedesktop.Notifications"
 			app_name = "VulnTrack"
 			id_num_to_replace = 0
-			icon = "alert.png"
+			icon = "{}/alert.png".format(spath)
 			actions_list = ''
 			hint = ''
 			time = 0   # Use seconds x 1000
